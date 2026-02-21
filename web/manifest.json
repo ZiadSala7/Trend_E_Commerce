@@ -1,6 +1,6 @@
 {
-    "name": "e_commerce_trend",
-    "short_name": "e_commerce_trend",
+    "name": "Trend",
+    "short_name": "Trend",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

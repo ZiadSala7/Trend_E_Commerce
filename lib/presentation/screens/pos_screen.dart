@@ -4,17 +4,18 @@ import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/breakpoints.dart';
 import '../providers/pos_provider.dart';
-import '../widgets/invoice_panel.dart';
 import '../widgets/product_grid.dart';
+import 'mobile_layout.dart';
+import 'tablet_layout.dart';
 
 class PosScreen extends StatefulWidget {
   const PosScreen({super.key});
 
   @override
-  State<PosScreen> createState() => _PosScreenState();
+  State<PosScreen> createState() => PosScreenState();
 }
 
-class _PosScreenState extends State<PosScreen> {
+class PosScreenState extends State<PosScreen> {
   @override
   void initState() {
     super.initState();
@@ -32,9 +33,9 @@ class _PosScreenState extends State<PosScreen> {
           builder: (context, constraints) {
             final isTablet = Breakpoints.isTablet(constraints.maxWidth);
             if (isTablet) {
-              return _TabletLayout();
+              return TabletLayout();
             }
-            return _MobileLayout();
+            return MobileLayout();
           },
         ),
       ),
@@ -42,64 +43,9 @@ class _PosScreenState extends State<PosScreen> {
   }
 }
 
-class _TabletLayout extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(flex: 1, child: _ProductCatalog()),
-        Flexible(flex: 1, child: InvoicePanel()),
-      ],
-    );
-  }
-}
+class ProductCatalog extends StatelessWidget {
+  const ProductCatalog({super.key});
 
-class _MobileLayout extends StatefulWidget {
-  @override
-  State<_MobileLayout> createState() => _MobileLayoutState();
-}
-
-class _MobileLayoutState extends State<_MobileLayout> {
-  int _selectedIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: IndexedStack(
-            index: _selectedIndex,
-            children: [_ProductCatalog(), const InvoicePanel()],
-          ),
-        ),
-        Consumer<PosProvider>(
-          builder: (context, provider, _) {
-            return BottomNavigationBar(
-              currentIndex: _selectedIndex,
-              onTap: (i) => setState(() => _selectedIndex = i),
-              items: [
-                const BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_bag_outlined),
-                  label: 'Products',
-                ),
-                BottomNavigationBarItem(
-                  icon: Badge(
-                    label: Text('${provider.cartItemCount}'),
-                    isLabelVisible: provider.cartItemCount > 0,
-                    child: const Icon(Icons.receipt_long_outlined),
-                  ),
-                  label: 'Invoice',
-                ),
-              ],
-            );
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class _ProductCatalog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.sizeOf(context).width < Breakpoints.tablet;
@@ -112,9 +58,9 @@ class _ProductCatalog extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _SearchBar(isMobile: isMobile),
+              SearchBar(isMobile: isMobile),
               SizedBox(height: isMobile ? 10 : 12),
-              const _CategoryChips(),
+              const CategoryChips(),
             ],
           ),
         ),
@@ -124,8 +70,8 @@ class _ProductCatalog extends StatelessWidget {
   }
 }
 
-class _SearchBar extends StatelessWidget {
-  const _SearchBar({required this.isMobile});
+class SearchBar extends StatelessWidget {
+  const SearchBar({super.key, required this.isMobile});
 
   final bool isMobile;
 
@@ -156,8 +102,8 @@ class _SearchBar extends StatelessWidget {
   }
 }
 
-class _CategoryChips extends StatelessWidget {
-  const _CategoryChips();
+class CategoryChips extends StatelessWidget {
+  const CategoryChips({super.key});
 
   @override
   Widget build(BuildContext context) {

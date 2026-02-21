@@ -20,7 +20,7 @@ class ECommerceTrendApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => PosProvider(),
       child: MaterialApp(
-        title: 'E-Commerce Trend',
+        title: 'Trend',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
