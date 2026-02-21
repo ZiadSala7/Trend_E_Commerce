@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/invoice_panel.dart';
-import 'pos_screen.dart';
+import '../widgets/product_catalog.dart';
 
 class TabletLayout extends StatelessWidget {
   const TabletLayout({super.key});

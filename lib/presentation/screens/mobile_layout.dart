@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/pos_provider.dart';
 import '../widgets/invoice_panel.dart';
-import 'pos_screen.dart';
+import '../widgets/product_catalog.dart';
 
 class MobileLayout extends StatefulWidget {
   const MobileLayout({super.key});
