@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/constants/breakpoints.dart';
+import '../../../../core/constants/breakpoints.dart';
 import 'category_chips.dart';
 import 'search_bar.dart';
 import 'product_grid.dart';

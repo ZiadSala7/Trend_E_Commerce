@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart' hide Category;
 
-import '../../core/di/injection.dart';
+import '../../../../core/di/injection.dart';
 import '../../domain/entities/category.dart';
 import '../../domain/entities/invoice.dart';
 import '../../domain/entities/invoice_item.dart';

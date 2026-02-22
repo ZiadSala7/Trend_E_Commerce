@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/constants/app_colors.dart';
-import '../../core/constants/breakpoints.dart';
+import '../../../../core/constants/app_colors.dart';
+import '../../../../core/constants/breakpoints.dart';
 import '../providers/pos_provider.dart';
 import 'mobile_layout.dart';
 import 'tablet_layout.dart';
