@@ -15,7 +15,7 @@ class Product extends Equatable {
   final double price;
   final int stock;
   final String? imageUrl;
-  final String? categoryId;
+  final int? categoryId;
 
   bool get isInStock => stock > 0;
 

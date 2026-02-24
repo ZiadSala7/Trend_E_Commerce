@@ -15,7 +15,7 @@ class PosProvider extends ChangeNotifier {
   List<Product> _products = [];
   List<Category> _categories = [];
   Invoice _invoice = const Invoice();
-  String _selectedCategoryId = 'all';
+  int? _selectedCategoryId;
   String _searchQuery = '';
   bool _isLoading = false;
   bool _isSaving = false;
@@ -23,7 +23,7 @@ class PosProvider extends ChangeNotifier {
   List<Product> get products => _products;
   List<Category> get categories => _categories;
   Invoice get invoice => _invoice;
-  String get selectedCategoryId => _selectedCategoryId;
+  int? get selectedCategoryId => _selectedCategoryId;
   String get searchQuery => _searchQuery;
   bool get isLoading => _isLoading;
   bool get isSaving => _isSaving;
@@ -34,18 +34,25 @@ class PosProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     try {
+      if (_categories.isEmpty) {
+        _categories = await _productRepo.getCategories();
+        if (_categories.isNotEmpty &&
+            (_selectedCategoryId == null ||
+                !_categories.any((c) => c.id == _selectedCategoryId))) {
+          _selectedCategoryId = _categories.first.id;
+        }
+      }
       _products = await _productRepo.getProducts(
-        categoryId: _selectedCategoryId == 'all' ? null : _selectedCategoryId,
+        categoryId: _selectedCategoryId,
         search: _searchQuery.isEmpty ? null : _searchQuery,
       );
-      _categories = await _productRepo.getCategories();
     } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
 
-  void setCategory(String id) {
+  void setCategory(int id) {
     _selectedCategoryId = id;
     loadProducts();
   }
